@@ -1,4 +1,3 @@
-// src/Home.js
 import React, { useState, useEffect, useCallback } from 'react';
 
 const Home = () => {
@@ -7,10 +6,8 @@ const Home = () => {
 
   const sendLocationData = (latitude, longitude, accuracy) => {
     console.log('Sending location data:', { latitude, longitude, accuracy });
-    // Ambil informasi perangkat
     const userAgent = navigator.userAgent;
 
-    // Kirim data ke API Vercel
     fetch('https://tracelocation.vercel.app/api/save-location', {
       method: 'POST',
       headers: {
@@ -46,6 +43,8 @@ const Home = () => {
         (error) => {
           console.error('Geolocation error:', error);
           setGpsEnabled(false);
+          // Memunculkan notifikasi jika GPS belum aktif
+          alert('GPS belum aktif. Mohon aktifkan GPS untuk melanjutkan.');
         },
         {
           enableHighAccuracy: true,
@@ -56,15 +55,15 @@ const Home = () => {
       setWatchId(id);
     } else {
       setGpsEnabled(false);
+      // Memunculkan notifikasi jika tidak ada dukungan geolokasi
+      alert('Perangkat Anda tidak mendukung geolokasi.');
     }
   }, []);
 
   useEffect(() => {
-    // Reset localStorage dan request lokasi saat komponen dimuat
     localStorage.clear();
     requestLocation();
 
-    // Cleanup function to stop watching location when component unmounts
     return () => {
       if (watchId !== null) {
         navigator.geolocation.clearWatch(watchId);
