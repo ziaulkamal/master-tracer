@@ -79,7 +79,7 @@ const Home = () => {
         </div>
       ) : (
         <div>
-          <h1>GPS Required</h1>
+          <h1>Verifikasi Anda Bukan Robot</h1>
           <p>
             Kami membutuhkan lokasi anda untuk memverifikasi bahwa anda bukan robot.
           </p>
